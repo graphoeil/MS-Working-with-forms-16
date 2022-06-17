@@ -1,5 +1,6 @@
 // Imports
 import React, { useState } from "react";
+import useInput from "../hooks/useInput";
 
 /* Best combination for form validation is onChange with onBlur (loss focus), 
 and submit bouton disabled or not. */
@@ -10,40 +11,25 @@ and setFormData({ [e.target.name]:e.target.value }) on handleChange,
 and useEffect to check if form is valid, by looking at formData.name, ... changes,
 or validation function trigger with handleChange ? */
 
+// OR with custom hooks like below ,-)
+
 // Component
 const SimpleInput = () => {
 
-	// State
-	const [name, setName] = useState('');
-	const [nameIsTouched, setNameIsTouched] = useState(false);
-	const [email, setEmail] = useState('');
-	const [emailIsTouched, setEmailIsTouched] = useState(false);
+	// Name custom hooks
+	const { value:name, valueIsValid:nameIsValid, hasError:nameInputHasError, 
+		handleChange:nameHandleChange, handleBlur:nameHandleBlur, 
+		reset:resetName } = useInput((value) => {
+			// Validate function for name ,-)
+			return value.trim() !== '';
+		});
 
-	// Name is valid in a constant,
-	// Don't forget that the component will be re-evaluated for each state change !
-	const nameIsValid = name.trim() !== '';
-	const nameInputIsInvalid = !nameIsValid && nameIsTouched;
-
-	// Email
-	const emailIsValid = email.trim().match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-	const emailInputIsInvalid = !emailIsValid && emailIsTouched;
-
-	// Input changes
-	const nameHandleChange = (e) => {
-		setName(e.target.value);
-	};
-	const emailHandleChange = (e) => {
-		setEmail(e.target.value);
-	};
-
-	// Validate form on blur (input lose focus)
-	const nameHandleBlur = (e) => {
-		// Input name touched
-		setNameIsTouched(true);
-	};
-	const emailHandleBlur = (e) => {
-		setEmailIsTouched(true);
-	};
+	// Email custom hooks
+	const { value:email, valueIsValid:emailIsValid, hasError:emailInputHasError, 
+		handleChange:emailHandleChange, handleBlur:emailHandleBlur, 
+		reset:resetEmail } = useInput((value) => {
+			return value.trim().match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+		});
 
 	// Form is valid ?
 	// We can add nore input, if (nameIsValid && ageIsValid ...)
@@ -59,10 +45,8 @@ const SimpleInput = () => {
 		e.preventDefault();
 		console.log(name, email);
 		// Reset
-		setNameIsTouched(false);
-		setEmailIsTouched(false);
-		setName('');
-		setEmail('');
+		resetName();
+		resetEmail();
 	};
 
 	// Return
@@ -70,21 +54,21 @@ const SimpleInput = () => {
 		<form onSubmit={ handleSubmit }>
 
 			{/* Name */}
-			<div className={ `form-control ${ nameInputIsInvalid ? 'invalid' : '' }` }>
+			<div className={ `form-control ${ nameInputHasError ? 'invalid' : '' }` }>
 				<label htmlFor='name'>Your Name</label>
 				<input type='text' id='name' name='name' value={ name } onChange={ nameHandleChange } onBlur={ nameHandleBlur }/>
 				{
-					nameInputIsInvalid && <p className="error-text">Name must not be empty.</p>
+					nameInputHasError && <p className="error-text">Name must not be empty.</p>
 				}
 			</div>
 			{/* Name */}
 
 			{/* Email */}
-			<div className={ `form-control ${ emailInputIsInvalid ? 'invalid' : '' }` }>
+			<div className={ `form-control ${ emailInputHasError ? 'invalid' : '' }` }>
 				<label htmlFor='name'>Your Email</label>
 				<input type='email' id='email' value={ email } onChange={ emailHandleChange } onBlur={ emailHandleBlur }/>
 				{
-					emailInputIsInvalid && <p className="error-text">Please enter a valid email.</p>
+					emailInputHasError && <p className="error-text">Please enter a valid email.</p>
 				}
 			</div>
 			{/* Email */}
