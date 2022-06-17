@@ -79,7 +79,7 @@ const SimpleInput = () => {
 			{/* Email */}
 			<div className={ `form-control ${ emailInputIsInvalid ? 'invalid' : '' }` }>
 				<label htmlFor='name'>Your Email</label>
-				<input type='text' id='name' value={ email } onChange={ emailHandleChange } onBlur={ emailHandleBlur }/>
+				<input type='email' id='email' value={ email } onChange={ emailHandleChange } onBlur={ emailHandleBlur }/>
 				{
 					emailInputIsInvalid && <p className="error-text">Please enter a valid email.</p>
 				}
