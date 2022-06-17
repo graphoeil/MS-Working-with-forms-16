@@ -32,7 +32,7 @@ const BasicForm = () => {
 	if (firstNameIsValid && lastNameIsValid && emailIsValid){
 		formIsValid = true;
 	} else {
-		formIsValid = true;
+		formIsValid = false;
 	}
 
 	// Submit form
