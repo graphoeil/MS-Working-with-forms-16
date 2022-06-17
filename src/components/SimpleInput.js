@@ -27,15 +27,18 @@ const SimpleInput = () => {
 		setNameIsTouched(true);
 	};
 
+	// Form is valid ?
+	// We can add nore input, if (nameIsValid && ageIsValid ...)
+	let formIsValid = false;
+	if (nameIsValid){
+		formIsValid = true;
+	} else {
+		formIsValid = false;
+	}
+
 	// Submit form
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// Input name touched
-		setNameIsTouched(true);
-		// Validation
-		if (!nameIsValid){
-			return;
-		}
 		// Reset
 		setNameIsTouched(false);
 		setName('');
@@ -52,7 +55,9 @@ const SimpleInput = () => {
 				}
 			</div>
 			<div className="form-actions">
-				<button>Submit</button>
+				<button disabled={ !formIsValid }>
+					Submit
+				</button>
 			</div>
 		</form>
 	);
