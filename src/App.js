@@ -1,6 +1,6 @@
 // Imports
 import React from "react";
-import SimpleInput from "./components/SimpleInput";
+import BasicForm from "./components/BasicForm";
 
 // Component
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
 	// Return
 	return(
 		<div className="app">
-			<SimpleInput/>
+			<BasicForm/>
 		</div>
 	);
 
