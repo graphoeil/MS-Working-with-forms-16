@@ -41,6 +41,7 @@ const BasicForm = () => {
 		// Check if form is valid, even with disable on button
 		// indeed, the user can access the devtools and remove disable props !
 		if (!formIsValid){
+			console.log('Thanks to fill all input.');
 			return;
 		}
 		console.log(firstName, lastName, email);
