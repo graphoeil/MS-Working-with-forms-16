@@ -1,5 +1,5 @@
 // Imports
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 /* Best combination for form validation is onChange with onBlur (loss focus), 
 and submit bouton disabled or not. */
