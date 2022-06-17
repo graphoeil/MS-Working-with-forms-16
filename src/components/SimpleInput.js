@@ -5,7 +5,9 @@ import React, { useState } from "react";
 and submit bouton disabled or not. */
 
 /* Naturaly these scripts will be best with a formData state with an object :
-const [formData, setFormData] = useState({ name:'', nameIsValid:'', nameIsTouched:'' ... formIsValid:false }) */
+const [formData, setFormData] = useState({ name:'', nameIsValid:'', nameIsTouched:'' ... formIsValid:false })
+and setFormData({ [e.target.name]:e.target.value }) on handleChange, 
+and useEffect to check if form is valid, by looking at formData.emailIsValid, ... */
 
 // Component
 const SimpleInput = () => {
