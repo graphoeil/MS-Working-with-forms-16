@@ -38,6 +38,11 @@ const BasicForm = () => {
 	// Submit form
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		// Check if form is valid, even with disable on button
+		// indeed, the user can access the devtools and remove disable props !
+		if (!formIsValid){
+			return;
+		}
 		console.log(firstName, lastName, email);
 		firstNameReset();
 		lastNameReset();
