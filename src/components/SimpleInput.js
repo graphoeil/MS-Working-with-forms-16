@@ -1,5 +1,5 @@
 // Imports
-import React, { useState } from "react";
+import React from "react";
 import useInput from "../hooks/useInput";
 
 /* Best combination for form validation is onChange with onBlur (loss focus), 
