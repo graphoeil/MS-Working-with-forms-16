@@ -54,7 +54,7 @@ const BasicForm = () => {
 					<label htmlFor='firsName'>First Name</label>
 					<input type='text' id='firsName' value={ firstName } onChange={ firstNameHandleChange } onBlur={ firstNameHandleBlur }/>
 					{
-						firstNameHasError && <p className="error-text">First name must not be empty.</p>
+						firstNameHasError && <p className="error-text">Please enter a first name.</p>
 					}
 				</div>
 				{/* First name */}
@@ -64,7 +64,7 @@ const BasicForm = () => {
 					<label htmlFor='lastName'>Last Name</label>
 					<input type='text' id='lastName' value={ lastName } onChange={ lastNameHandleChange } onBlur={ lastNameHandleBlur }/>
 					{
-						lastNameHasError && <p className="error-text">Last name must not be empty.</p>
+						lastNameHasError && <p className="error-text">Please enter a last name.</p>
 					}
 				</div>
 				{/* Last name */}
