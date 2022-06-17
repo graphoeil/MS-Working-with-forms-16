@@ -1,22 +1,30 @@
 // Imports
 import React, { useEffect, useState } from "react";
 
+/* Best combination for form validation is onChange with onBlur (loss focus), 
+and submit bouton disabled or not. */
+
 // Component
 const SimpleInput = () => {
 
 	// State
 	const [name, setName] = useState('');
-	const [nameIsValid, setNameIsValid] = useState(false);
 	const [nameIsTouched, setNameIsTouched] = useState(false);
 
-	// Do not define nameIsValid as true
-	useEffect(() => {
-		console.log('Name input is valid !');
-	},[name]);
+	// Name is valid in a constant,
+	// Don't forget that the component will be re-evaluated for each state change !
+	const nameIsValid = name.trim() !== '';
+	const nameInputIsInvalid = !nameIsValid && nameIsTouched;
 
 	// Name input change
 	const nameHandleChange = (e) => {
 		setName(e.target.value);
+	};
+
+	// Validate form on blur (input lose focus)
+	const nameHandleBlur = (e) => {
+		// Input name touched
+		setNameIsTouched(true);
 	};
 
 	// Submit form
@@ -25,23 +33,22 @@ const SimpleInput = () => {
 		// Input name touched
 		setNameIsTouched(true);
 		// Validation
-		if (name.trim() === ''){
-			setNameIsValid(false);
+		if (!nameIsValid){
 			return;
 		}
-		setNameIsValid(true);
 		// Reset
+		setNameIsTouched(false);
 		setName('');
 	};
 
 	// Return
 	return(
 		<form onSubmit={ handleSubmit }>
-			<div className={ `form-control ${ !nameIsValid && nameIsTouched ? 'invalid' : '' }` }>
+			<div className={ `form-control ${ nameInputIsInvalid ? 'invalid' : '' }` }>
 				<label htmlFor='name'>Your Name</label>
-				<input type='text' id='name' value={ name } onChange={ nameHandleChange }/>
+				<input type='text' id='name' value={ name } onChange={ nameHandleChange } onBlur={ nameHandleBlur }/>
 				{
-					!nameIsValid && nameIsTouched && <p className="error-text">Name must not be empty.</p>
+					nameInputIsInvalid && <p className="error-text">Name must not be empty.</p>
 				}
 			</div>
 			<div className="form-actions">
