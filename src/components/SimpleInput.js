@@ -7,7 +7,8 @@ and submit bouton disabled or not. */
 /* Naturaly these scripts will be best with a formData state with an object :
 const [formData, setFormData] = useState({ name:'', nameIsValid:'', nameIsTouched:'' ... formIsValid:false })
 and setFormData({ [e.target.name]:e.target.value }) on handleChange, 
-and useEffect to check if form is valid, by looking at formData.emailIsValid, ... */
+and useEffect to check if form is valid, by looking at formData.name, ... changes,
+or validation function trigger with handleChange ? */
 
 // Component
 const SimpleInput = () => {
